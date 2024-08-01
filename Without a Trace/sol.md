@@ -1,8 +1,11 @@
 # Challenge Details 
 
 Category: Crypto
+
 Title: Without a Trace
+
 Points: 246
+
 Solves: 298
 
 # Challenge Summary
