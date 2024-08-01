@@ -24,13 +24,13 @@ key_incomplete = bytes(x ^ y for x, y in zip(plaintext_known, ct_incomplete))
 
 # Brute-force the 8th byte of the key
 for i in range(256):
-    # Try the 8th byte
+    # Concat the last byte
     key = key_incomplete + bytes([i])
     
-    # Decrypt the full flag using the candidate key
+    # Decrypt (XOR)
     flag = bytes(x ^ y for x, y in zip(ct, cycle(key)))
 
-    # Check if the decrypted flag looks correct (starts with "uiuctf{" and ends with "}")
+    # Check for flag correctness
     if flag.startswith(b"uiuctf{") and flag.endswith(b"}"):
         print(f"Found key: {key}")
         print(f"Flag: {flag.decode()}")
