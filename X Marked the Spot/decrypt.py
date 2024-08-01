@@ -1,22 +1,31 @@
 from itertools import cycle
 
-# Read the ciphertext from the file
 with open("ct", "rb") as ct_file:
     ct = ct_file.read()
 
-# Known partial plaintext (first 7 bytes of the flag)
-known_plaintext = b"uiuctf{"
+# to solve this challenge, calculate the key (8 bytes in size)
+# To calculate for the key we know:
+# 1. the known plaintext up to the first 7 bytes
+# 2. the ciphertext
 
-# Extract the part of the ciphertext that corresponds to the known plaintext
-partial_ct = ct[:len(known_plaintext)]
+# As such, we can calculate the the first 7 bytes of the key (incomplete) by xor-ing the plaintext and ciphertext
+# To obtain the complete key, just brute force and try 256 different characters, 
+# for each of the 256 chars, 
+# concat the last byte to the imcomplete key, 
+# xor the key with the ciphertext to get back the full plaintext
 
-# Derive the first 7 bytes of the key by XORing the known plaintext with the corresponding part of the ciphertext
-partial_key = bytes(x ^ y for x, y in zip(known_plaintext, partial_ct))
+# Known partial plaintext 
+plaintext_known = b"uiuctf{"
+
+# 
+ct_incomplete = ct[:7]
+
+key_incomplete = bytes(x ^ y for x, y in zip(plaintext_known, ct_incomplete))
 
 # Brute-force the 8th byte of the key
 for i in range(256):
     # Try the 8th byte
-    key = partial_key + bytes([i])
+    key = key_incomplete + bytes([i])
     
     # Decrypt the full flag using the candidate key
     flag = bytes(x ^ y for x, y in zip(ct, cycle(key)))
