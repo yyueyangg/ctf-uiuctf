@@ -1,5 +1,8 @@
 import numpy as np
 from Crypto.Util.number import bytes_to_long
+from itertools import permutations
+from SECRET import FLAG
+
 
 def inputs():
     print("[WAT] Define diag(u1, u2, u3. u4, u5)")
@@ -65,10 +68,10 @@ def main():
         return
 
     res = fun(M)
-    if res == 2000128101369:
-        print("Congratulations! You've captured the flag.")
-    else:
-        print("Try adjusting the inputs to match the expected result.")
+    if res == None:
+        print("[WAT] You tried something weird...")
+        return
+    print(f"[WAT] Have fun: {res}")
 
 if __name__ == "__main__":
     main()

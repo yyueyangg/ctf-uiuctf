@@ -1,48 +1,20 @@
-"""
-u1 = uiuct
-u2 =f{tr4
-u3 = c1ng_
-u4 = &&_mu
-u5 = lt5!}
+from Crypto.Util.number import long_to_bytes
 
-flag = uiuctf{tr4c1ng_&&_mult5!}
+input_one_for_all = 2000128101369
+input_two_for_u1 = 2504408575853
+input_two_for_u2 = 2440285994541
+input_two_for_u3 = 2426159182680
+input_two_for_u4 = 2163980646766
+input_two_for_u5 = 2465934208374
 
-----------------------------------------------------------------
-"""
+f1 = 2504408575853 - 2000128101369
+f2 = 2440285994541 - 2000128101369
+f3 = 2426159182680 - 2000128101369
+f4 = 2163980646766 - 2000128101369
+f5 = 2465934208374 - 2000128101369
 
-import numpy as np
-from Crypto.Util.number import bytes_to_long, long_to_bytes
-
-
-def fun(M):
-    f = [bytes_to_long(bytes("uiuct f{man  what ever} asder"[5*i:5*(i+1)], 'utf-8')) for i in range(5)]
-    F = [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-    ]
-    for i in range(5):
-        F[i][i] = f[i]
-
-    R = np.matmul(F, M)
-    print(f)
-    return np.trace(R)
-
-
-def main():
-    print("[WAT] Welcome")
-    M = [
-        [1, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 0, 1, 0],
-        [0, 0, 0, 0, 1],
-    ]
-
-    res = fun(M)
-    print(f"[WAT] Have fun: {res}")
-
-if __name__ == "__main__":
-    main()
+print(long_to_bytes(f1))
+print(long_to_bytes(f2))
+print(long_to_bytes(f3))
+print(long_to_bytes(f4))
+print(long_to_bytes(f5))
